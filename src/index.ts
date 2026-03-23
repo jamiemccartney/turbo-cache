@@ -24,7 +24,10 @@ async function bootstrap() {
 	});
 
 	server.on("error", (err) => {
-		childLogger.fatal({ event: "start", status: "failed", err }, "failed to start server");
+		childLogger.fatal(
+			{ event: "start", status: "failed", err },
+			"failed to start server",
+		);
 		Process.exit(1);
 	});
 
@@ -42,6 +45,9 @@ async function bootstrap() {
 }
 
 bootstrap().catch((err) => {
-	childLogger.error({ event: "start", status: "failed", err }, "error doing server bootstrap");
+	childLogger.error(
+		{ event: "start", status: "failed", err },
+		"error doing server bootstrap",
+	);
 	Process.exit(1);
 });

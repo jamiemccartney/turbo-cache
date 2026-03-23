@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - create-bucket
+      - minio
+    environment:
+      TURBO_TOKENS: "test"
+      AWS_BUCKET: "turbo-repo-cache"
+      AWS_REGION: "us-east-1"
+      AWS_ENDPOINT: "http://minio:9000"
+      AWS_ACCESS_KEY_ID: "minio"
+      AWS_SECRET_ACCESS_KEY: "minioadmin"
+      AWS_FORCE_PATH_STYLE: "true"
+      LOGGER_LEVEL: "info"
+    ports:
+      - "8080:8080"
+
+  minio:
+    image: quay.io/minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: [ "server", "--console-address", ":9001", "/data" ]
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minioadmin
+
+  create-bucket:
+    image: quay.io/minio/mc:latest
+    depends_on:
+      - minio
+    restart: on-failure
+    entrypoint: >
+      /bin/bash -c "
+
+      until /usr/bin/mc alias set dockerminio http://minio:9000 minio minioadmin >/dev/null 2>&1; do
+        echo 'MinIO not ready yet, retrying...'; 
+        sleep 0.5; 
+      done; 
+
+      /usr/bin/mc mb --ignore-existing turbo-repo-cache;
+
+      exit 0;
+      "

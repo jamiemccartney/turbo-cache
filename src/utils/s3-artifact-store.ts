@@ -22,6 +22,7 @@ class ArtifactStore {
 		region: string;
 		endpoint?: string;
 		credentials?: { accessKeyId: string; secretAccessKey: string };
+		forcePathStyle?: boolean;
 	}) {
 		this.client = new S3Client({
 			region: opts.region,
@@ -29,9 +30,7 @@ class ArtifactStore {
 			...(opts.credentials?.secretAccessKey && opts.credentials?.accessKeyId
 				? { credentials: opts.credentials }
 				: {}),
-			forcePathStyle: ["localhost", "127.0.0.1"].some((host) =>
-				opts.endpoint?.includes(host),
-			),
+			forcePathStyle: opts.forcePathStyle,
 		});
 		this.bucket = opts.bucket;
 	}

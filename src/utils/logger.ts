@@ -1,6 +1,6 @@
+import Process from "node:process";
 import pino from "pino";
 import { ZodError } from "zod";
-import Process from "node:process";
 
 export const logger = pino({
 	timestamp: pino.stdTimeFunctions.isoTime,

@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsup",
-		"lint": "pnpm biome",
+		"lint": "pnpm biome check",
+		"lint:fix": "pnpm biome format --write",
 		"lint:ci": "pnpm biome",
 		"types": "tsc --noEmit",
 		"test": "vitest"

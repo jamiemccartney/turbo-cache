@@ -8,6 +8,7 @@ export const getContext = (env: Env) => {
 		region: env.AWS_REGION,
 		bucket: env.AWS_BUCKET,
 		endpoint: env.AWS_ENDPOINT,
+		forcePathStyle: env.AWS_FORCE_PATH_STYLE,
 		...(env.AWS_ACCESS_KEY_ID && env.AWS_SECRET_ACCESS_KEY
 			? {
 					credentials: {
