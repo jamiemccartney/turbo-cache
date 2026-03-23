@@ -1,0 +1,25 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "es2023",
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"erasableSyntaxOnly": true,
+		"noEmit": true,
+		"module": "preserve",
+		"lib": ["es2023", "dom"],
+		"paths": {
+			"@schemas": ["./src/schemas"],
+			"@utils/*": ["./src/utils/*"],
+			"@middlewares": ["./src/middlewares"]
+		}
+	}
+}
