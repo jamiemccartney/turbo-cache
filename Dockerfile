@@ -11,11 +11,9 @@ COPY . .
 RUN pnpm run build
 
 
-FROM ghcr.io/rtvkiz/minimal-node-slim
+FROM ghcr.io/rtvkiz/minimal-node-slim:25.8.1-r0
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
-
-EXPOSE 8080
+COPY --from=builder --chown=1000:1000 /app/dist ./dist
 
 USER 1000:1000
 
