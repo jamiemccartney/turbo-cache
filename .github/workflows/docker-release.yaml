@@ -1,9 +1,8 @@
-name: Create and publish a Docker image
+name: Publish Docker on Release
 
-# Configures this workflow to run every time a change is pushed to the branch called `release`.
 on:
-  push:
-    branches: ['release']
+  release:
+    types: ["released", "prereleased"]
 
 env:
   REGISTRY: ghcr.io
