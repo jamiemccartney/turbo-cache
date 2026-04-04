@@ -9,12 +9,10 @@ const envSchema = z
 			.string()
 			.transform((val) => val.split(",").map((val) => val.trim()))
 			.pipe(z.array(z.string()).min(1)),
-
 		LOGGER_LEVEL: z
 			.enum(["fatal", "error", "warn", "info", "debug", "trace"])
-			.optional() //
+			.optional()
 			.default("info"),
-
 		AWS_BUCKET: z.string().min(1),
 		AWS_REGION: z.string(),
 		AWS_ENDPOINT: z.string().optional(),
